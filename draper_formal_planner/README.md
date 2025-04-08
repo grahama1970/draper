@@ -1,28 +1,5 @@
 <img src="../source_materials/www.draper.com/draper_logo.svg" alt="Draper Logo" width="300"/>
 
-<style>
-body {
-  font-family: "Gotham", sans-serif;
-  background-color: #FFFFFF;
-  color: #10181F;
-}
-h1, h2, h3, h4, h5, h6 {
-  color: #10181F;
-}
-a {
-  color: #FF4611;
-}
-blockquote {
-  background-color: #F6F4EE;
-  color: #10181F;
-  padding: 10px 20px;
-  border-left: 4px solid #FF4611;
-  border-radius: 5px;
-}
-.mermaid {
-  background-color: #FFFFFF !important;
-}
-</style>
 
 This project leverages intelligent autonomous agents to enhance the security, adaptability, and efficiency of complex software systems. These agents collaborate to identify vulnerabilities, plan secure operations, and dynamically respond to evolving threats. By integrating advanced reasoning and formal verification, the framework aims to provide robust, scalable solutions accessible to both technical experts and semi-technical stakeholders, ensuring clarity, transparency, and trust in automated decision-making.
 
