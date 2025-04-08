@@ -62,8 +62,8 @@ gantt
     Refine Retrieval Accuracy & CEX Analysis Help  : P4T3, after P4t2, 5d
     Finalize Documentation & User Guides (HITL Proc): P4T4, after P4t3, 3d
     Final Demo & Handover                          : P4T5, after P4t4, 2d
-Use code with caution.
-Markdown
+```
+---
 Final Task Plan: draper-mcp-formal-planner Development
 Phase 1: Setup, Curation & Retrieval
 

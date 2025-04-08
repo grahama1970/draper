@@ -1,0 +1,43 @@
+{
+  "mermaid_syntax_lessons": [
+    {
+      "rule": "Quote all edge labels, task names, and section headers containing special characters",
+      "details": "Special characters include parentheses (), colons :, pipes |, slashes /, question marks ?, commas ,, and spaces (optional but safer).",
+      "incorrect_example": "Mutator -->|Request Tier 2 Eval (Adaptive Sampling)| FormalSimRunner",
+      "correct_example": "Mutator -->|\"Request Tier 2 Eval (Adaptive Sampling)\"| FormalSimRunner"
+    },
+    {
+      "rule": "Quote all Gantt chart section headers with colons, parentheses, or special characters",
+      "details": "Unquoted section headers with colons or parentheses can break parsing.",
+      "incorrect_example": "section Phase 1: Core Infrastructure & Basic Loop (9 Weeks)",
+      "correct_example": "section \"Phase 1: Core Infrastructure & Basic Loop (9 Weeks)\""
+    },
+    {
+      "rule": "Remove all Markdown formatting inside Mermaid code blocks",
+      "details": "Do not use **bold**, _italic_, or other Markdown syntax inside Mermaid diagrams.",
+      "incorrect_example": "**Define SEU Model Ingestion Strategy** :p2t1, after p1t8, 5d",
+      "correct_example": "\"Define SEU Model Ingestion Strategy\" :p2t1, after p1t8, 5d"
+    },
+    {
+      "rule": "Remove inline comments inside Mermaid code blocks",
+      "details": "Inline comments like # comment will break Mermaid parsing.",
+      "incorrect_example": "SeniorCoder -->|Needs Context| Boomerang # Explicit Context Req.",
+      "correct_example": "SeniorCoder -->|\"Needs Context\"| Boomerang"
+    },
+    {
+      "rule": "Ensure Mermaid diagrams are inside properly labeled code blocks",
+      "details": "Use ```mermaid fenced code blocks, not ```markdown or ```text.",
+      "incorrect_example": "```markdown ... ```",
+      "correct_example": "```mermaid ... ```"
+    },
+    {
+      "rule": "Avoid nested code blocks inside Mermaid diagrams",
+      "details": "Nested code blocks can break rendering."
+    },
+    {
+      "rule": "Prefer quoting labels with spaces or punctuation even if not strictly required",
+      "details": "This improves robustness and avoids subtle parse errors."
+    }
+  ],
+  "summary": "Following these rules ensures Mermaid diagrams render correctly across tools and avoid common parse errors."
+}

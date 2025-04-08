@@ -77,8 +77,8 @@ sequenceDiagram
             break Loop
         end
     end
-Use code with caution.
-Markdown
+```
+---
 Workflow Explanation:
 
 Tasking & Retrieval: Planner assigns task. Boomerang queries DraperRetriever against the curated historical DB. Coder performs initial validation; Boomerang escalates to Human if retrieval is ambiguous. RadSpec provides SEU guidance.
