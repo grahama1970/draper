@@ -105,7 +105,7 @@ gantt
   - Action: Librarian checks Coder and Hacker updates for clarity and correctness.
   - Deliverable: Further refined documentation.
 
-- [ ] **Task 5.2: Designer Polish of Updated Content**
+- [X] **Task 5.2: Designer Polish of Updated Content**
   - Action: Designer polishes any new or modified content.
   - Deliverable: Further visually improved documentation.
 
