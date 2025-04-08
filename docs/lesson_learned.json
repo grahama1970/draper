@@ -48,6 +48,12 @@
     {
       "lesson": "Investigate discrepancies between Boomerang task completion reports and Git status.",
       "details": "Observed 'nothing to commit' after Boomerang reported successful file modifications for Task 2.1. This indicates a potential issue with file persistence, premature reporting, or incorrect commit attribution. Monitor and investigate further if this pattern repeats."
+    },
+    {
+      "title": "Coordinated Multi-Role Security Documentation Update",
+      "context": "Task 6.2 - Addressing Final Security Documentation Gaps",
+      "insight": "A structured workflow—starting with Librarian synthesis, followed by Coder technical drafting, Hacker validation, and Librarian clarity refinement—ensures security documentation is both technically robust and accessible. This sequence minimizes gaps and miscommunication, especially when explicit prior review details are unavailable.",
+      "date": "2025-04-08"
     }
   ]
 }
