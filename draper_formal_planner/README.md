@@ -11,70 +11,38 @@ An MCP-integrated, on-premises agentic system **proposed as a Research & Develop
 - **Integrated Resource Management**: The `Boomerang` orchestrator interacts with Draper's EDA license management system (Assumption: queryable) via the abstraction layer to ensure efficient utilization and queue jobs appropriately.
 - **Human-in-the-Loop by Design**: Ensures human control over critical steps (property approval, complex CEX interpretation, final sign-off).
 
+
 ## Workflow & Architecture
 ```mermaid
 sequenceDiagram
-    participant Planner as 📝 Planner (DO-254 Task)
-    participant Boomerang as 🪃 Boomerang (Orchestrator)
-    participant Retriever as 🔍 DraperRetriever (MCP - Curated DB)
-    participant Coder as 👩‍💻 SeniorCoder (vPlan/SVA/CEX Analysis)
-    participant Verifier as ⚙️ FormalVerifier (Abstracted + Annotated CEX)
-    participant RadSpec as ✨ RadHardSpecialist (SEU Expertise)
-    participant Human as 🧑‍🔬 Human Verifier (HITL)
-    participant HistoryDB as HIST DB (Curated Vector DB)
-    participant EDALayer as Abstraction Layer
-    participant FormalTool as VC Formal API (or other)
-    participant LicenseMgr as License Manager API (If Exists)
+    participant Planner as 📝 Planner
+    participant Boomerang as 🪃 Boomerang
+    participant Retriever as 🔍 DraperRetriever
+    participant Coder as 👩‍💻 SeniorCoder
+    participant Verifier as ⚙️ FormalVerifier
+    participant Human as 🧑‍🔬 Human
 
-    Planner->>Boomerang: Assign DO-254 Verification Task (Design X, Level A)
+    Planner->>Boomerang: Assign DO-254 Task
+    Boomerang->>Retriever: Query History
+    Retriever->>Boomerang: Candidate Properties
+    Boomerang->>Coder: Validate Properties (Simplified)
+    Coder->>Boomerang: Approved Props
+    Boomerang->>Coder: Generate vPlan/SVA
+    Coder->>Boomerang: Artifacts
 
-    %% Data Retrieval & Context Setup
-    Boomerang->>Retriever: Query Curated HistoryDB for Design X Context
-    Retriever-->>HistoryDB: Vector + Metadata Search
-    HistoryDB-->>Retriever: Ranked Historical Properties/Reports
-    Retriever->>Boomerang: Curated Candidate Properties
-    Boomerang->>Coder: Validate Retrieved Properties (Quick Check)
-    Coder->>Boomerang: Validated/Flagged Properties
-    alt Ambiguous/Low Confidence Retrieval
-        Boomerang->>Human: (ask_human) Review Retrieved Properties?
-        Human-->>Boomerang: Approved/Rejected Properties
-    end
-    Boomerang->>RadSpec: Request Relevant SEU Models/Guidance
-    RadSpec-->>Boomerang: SEU Models, SVA Injection Advice
-
-    %% vPlan & Artifact Generation
-    Boomerang->>Coder: Generate vPlan: Use Validated Props, Add New SVA (Rad-aware), Gen Covergroups
-    Coder->>Boomerang: Draft vPlan, SVA file, Covergroup file
-
-    %% Verification Execution & CEGAR Loop
-    loop Verification Cycle
-        Boomerang->>EDALayer: Check License Availability (Formal Tool)
-        EDALayer-->>LicenseMgr: Query License (If API Exists)
-        LicenseMgr-->>EDALayer: Status (Available/Unavailable)
-        alt License Unavailable or No API
-            Boomerang->>Boomerang: Queue Job / Log Warning, Wait...
-        end
-        Boomerang->>Verifier: Execute Formal Verification via EDALayer (vPlan artifacts, Design X, SEU context)
-        Verifier-->>EDALayer: Run Formal Tool Job
-        EDALayer-->>FormalTool: Execute Tool Commands
-        FormalTool-->>EDALayer: Raw Results (Pass/Fail/CEX, Coverage)
-        EDALayer-->>Verifier: Parsed & Standardized Results
-        Verifier->>Verifier: **Annotate CEX** (Signal Values, Timing)
-        Verifier->>Boomerang: Report Verification Results (incl. Annotated CEX path)
+    loop Verification & Refinement Cycle
+        Boomerang->>Verifier: Run Verification
+        Verifier->>Boomerang: Results (Pass or CEX)
 
         alt CEX Found
-            Boomerang->>Coder: Analyze Annotated CEX, Suggest Refinement/Bug
-            Coder->>Boomerang: Analysis Report (Suggested SVA Fix / Bug Location)
-            alt Complex CEX / Low Confidence Analysis
-                 Boomerang->>Human: (ask_human) Review CEX Analysis & Suggestion?
-                 Human-->>Boomerang: Confirmation / Alternative Refinement / Bug Ack
-            end
-            Boomerang->>Coder: Update SVA based on Confirmed Refinement
-            Coder->>Boomerang: Updated SVA File
-            Boomerang->>Boomerang: Continue Loop (Re-run specific proof)
-        else Pass / Coverage Goal Met
-            Boomerang->>Planner: Final Verification Report (Proofs, Coverage, DO-254 Artifacts)
-            break Loop
+            Note over Boomerang,Coder: CEX Analysis & Refinement (Simplified)
+            Boomerang->>Coder: Analyze CEX (Suggest Fix)
+            Coder->>Boomerang: Suggested Fix
+            Note over Boomerang,Human: Optional: Human Review of Suggestion
+            Boomerang->>Coder: Update SVA
+            Coder->>Boomerang: Updated SVA
+        else Verification Pass
+             Boomerang->>Planner: Report Success
         end
     end
 ```
