@@ -39,5 +39,11 @@
       "details": "This improves robustness and avoids subtle parse errors."
     }
   ],
-  "summary": "Following these rules ensures Mermaid diagrams render correctly across tools and avoid common parse errors."
+  "summary": "Following these rules ensures Mermaid diagrams render correctly across tools and avoid common parse errors.",
+  "planner_lessons": [
+    {
+      "lesson": "Parallelize multi-role reviews during initial documentation audits.",
+      "details": "When delegating an audit task, instruct Boomerang Mode to initiate Librarian, Designer, Coder, and Hacker reviews simultaneously. This accelerates the audit phase and allows for a faster compilation of prioritized issues once all reviews conclude."
+    }
+  ]
 }
