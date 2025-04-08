@@ -44,6 +44,10 @@
     {
       "lesson": "Parallelize multi-role reviews during initial documentation audits.",
       "details": "When delegating an audit task, instruct Boomerang Mode to initiate Librarian, Designer, Coder, and Hacker reviews simultaneously. This accelerates the audit phase and allows for a faster compilation of prioritized issues once all reviews conclude."
+    },
+    {
+      "lesson": "Investigate discrepancies between Boomerang task completion reports and Git status.",
+      "details": "Observed 'nothing to commit' after Boomerang reported successful file modifications for Task 2.1. This indicates a potential issue with file persistence, premature reporting, or incorrect commit attribution. Monitor and investigate further if this pattern repeats."
     }
   ]
 }

@@ -72,7 +72,7 @@ gantt
 
 ## Phase 2: Librarian Pass
 
-- [ ] **Task 2.1: Improve Clarity and Correctness**
+- [X] **Task 2.1: Improve Clarity and Correctness**
   - Action: Librarian revises content for clarity, comprehension, factual accuracy, and consistency.
   - Use ask-perplexity if unsure about any content.
   - Deliverable: Updated files with clearer, more accurate content.
