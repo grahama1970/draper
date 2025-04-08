@@ -60,37 +60,37 @@ gantt
     excludes    weekends
 
     section "Setup, Curation & Retrieval (8 weeks)"
-    Initialize Project & Dependencies          :done, P1T1, 2025-04-22, 5d
-    Historical Data Curation                   :active, P1T2, after P1T1, 10d
-    Vectorize & Index Data                     :P1T3, after P1T2, 7d
-    Implement DraperRetriever Agent            :P1T4, after P1T3, 7d
-    Implement Validation & HITL Hook           :P1T5, after P1T4, 5d
-    Phase 1 Verification & Demo                :P1T6, after P1T5, 2d
+    Init Project                              :done, P1T1, 2025-04-22, 5d
+    Data Curation                             :active, P1T2, after P1T1, 10d
+    Vectorize Data                            :P1T3, after P1T2, 7d
+    DraperRetriever                           :P1T4, after P1T3, 7d
+    Validation & HITL                        :P1T5, after P1T4, 5d
+    Phase 1 Demo                              :P1T6, after P1T5, 2d
 
     section "Formal Tool Abstraction & SEU Integration (8 weeks)"
-    Develop EDA Abstraction Layer              :P2T1, after P1T6, 10d
-    Integrate License Management               :P2T2, after P2T1, 5d
-    Implement FormalVerifier Agent             :P2T3, after P2T1, 7d
-    Define SEU Model Strategy & Scope          :P2T4, after P1T6, 5d
-    Implement RadHardSpecialist                :P2T5, after P2T4, 5d
-    SEU Injection in SVA Generation            :P2T6, after P2T5, 5d
-    Phase 2 Verification & Demo                :P2T7, after P2T6, 2d
+    EDA Abstraction                           :P2T1, after P1T6, 10d
+    License Mgmt                              :P2T2, after P2T1, 5d
+    FormalVerifier                            :P2T3, after P2T1, 7d
+    SEU Strategy                              :P2T4, after P1T6, 5d
+    RadHardSpecialist                         :P2T5, after P2T4, 5d
+    SEU Injection                             :P2T6, after P2T5, 5d
+    Phase 2 Demo                              :P2T7, after P2T6, 2d
 
     section "Artifact Generation & AI-Enhanced CEGAR (9 weeks)"
-    SeniorCoder vPlan/SVA Generation           :P3T1, after P2T7, 7d
-    Covergroup Generation                      :P3T2, after P3T1, 7d
-    CEX Annotation in FormalVerifier           :P3T3, after P2T7, 6d
-    CEX Analysis & Suggestion                  :P3T4, after P3T3, 7d
-    Implement CEGAR Loop & HITL                :P3T5, after P3T4, 7d
-    Integrate DO-254 Reporting Hooks           :P3T6, after P3T5, 3d
-    Phase 3 Verification & Demo                :P3T7, after P3T6, 2d
+    SeniorCoder vPlan…                      :P3T1, after P2T7, 7d
+    Covergroups                              :P3T2, after P3T1, 7d
+    CEX Annotation                           :P3T3, after P2T7, 6d
+    CEX Analysis                             :P3T4, after P3T3, 7d
+    CEGAR Loop & HITL                       :P3T5, after P3T4, 7d
+    DO-254 Hooks                            :P3T6, after P3T5, 3d
+    Phase 3 Demo                            :P3T7, after P3T6, 2d
 
     section "End-to-End Testing & Documentation (5 weeks)"
-    Develop E2E Test Cases                     :P4T1, after P3T7, 5d
-    Execute Tests & Performance Tuning         :P4T2, after P4T1, 7d
-    Refine Retrieval & CEX Analysis            :P4T3, after P4T2, 5d
-    Finalize Documentation & User Guides       :P4T4, after P4T3, 3d
-    Final Demo & Handover                     :P4T5, after P4T4, 2d
+    E2E Tests                                :P4T1, after P3T7, 5d
+    Tests & Tuning                          :P4T2, after P4T1, 7d
+    Refine Retrieval                         :P4T3, after P4T2, 5d
+    Finalize Docs                            :P4T4, after P4T3, 3d
+    Demo & Handover                         :P4T5, after P4T4, 2d
 ```
 
 ---

@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /form-submit
+Sitemap: https://www.draper.com/sitemap.xml

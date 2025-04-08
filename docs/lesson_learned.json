@@ -54,6 +54,12 @@
       "context": "Task 6.2 - Addressing Final Security Documentation Gaps",
       "insight": "A structured workflow—starting with Librarian synthesis, followed by Coder technical drafting, Hacker validation, and Librarian clarity refinement—ensures security documentation is both technically robust and accessible. This sequence minimizes gaps and miscommunication, especially when explicit prior review details are unavailable.",
       "date": "2025-04-08"
+    },
+    {
+      "title": "Integrate Operational Security Checks Earlier in Documentation Reviews",
+      "context": "Task 6.1 - Final Review Identified Critical Security Gaps",
+      "insight": "Relying solely on the final review (Phase 6) to catch critical operational security gaps (access control, key management, audit trails) is risky. Future plans should incorporate specific Hacker checks for these operational aspects earlier, perhaps during Phase 4 (Technical & Security Review), to allow more time for remediation and prevent late-stage blockers.",
+      "date": "2025-04-08"
     }
   ]
 }
