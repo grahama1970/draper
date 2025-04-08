@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draper Style Test</title>
+    <style>
+        :root {
+            --draper-orange: #FF4611;
+            --draper-dark: #10181F;
+            --draper-blue: #253746;
+            --draper-gray: #DCD7C7;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: var(--draper-dark);
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: var(--draper-orange);
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: white;
+            border-left: 4px solid var(--draper-orange);
+            padding: 20px;
+            margin-bottom: 20px;
+            color: var(--draper-dark);
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--draper-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: var(--draper-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Engineering Solutions</h1>
+        <div class="card">
+            <h2>Browser Tool Test</h2>
+            <p>This is a test page using Draper's brand colors and styling:</p>
+            <ul>
+                <li>Orange: #FF4611</li>
+                <li>Dark Blue/Black: #10181F</li>
+                <li>Dark Blue: #253746</li>
+                <li>Gray: #DCD7C7</li>
+            </ul>
+            <a href="#" class="btn">Learn More</a>
+        </div>
+    </div>
+</body>
+</html>
