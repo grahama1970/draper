@@ -53,7 +53,7 @@ Develop an MCP-compatible, on-premises agentic R&D system (**draper-mcp-formal-p
 *(See `taskplan.md` for detailed Gantt chart)*
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f0f0f0'}}}%%
+%%{init: {'theme': 'forest'}}%%
 gantt
     dateFormat  YYYY-MM-DD
     title       Formal Planner Task Plan (v2.1 - Final)

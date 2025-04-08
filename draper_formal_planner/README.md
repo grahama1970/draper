@@ -63,7 +63,7 @@ gantt
     title       Formal Planner Task Plan (v2.1 - Final)
     excludes    weekends
 
-    section "Setup, Curation & Retrieval (8 weeks)"
+    section "Setup & Retrieval (8w)"
     Initialize Project & Dependencies          :2025-04-22, 5d
     Data Curation                             :after P1T1, 10d
     Vectorize Data                           :after P1T2, 7d
@@ -71,7 +71,7 @@ gantt
     Validation & HITL                       :after P1T4, 5d
     Phase 1 Verification & Demo              :after P1T5, 2d
 
-    section "Formal Tool Abstraction & SEU Integration (8 weeks)"
+    section "Tool & SEU Integration (8w)"
     EDA Abstraction                          :after P1T6, 10d
     License Mgmt                             :after P2T1, 5d
     FormalVerifier                           :after P2T1, 7d
@@ -80,7 +80,7 @@ gantt
     SEU Injection                            :after P2T5, 5d
     Phase 2 Verification & Demo              :after P2T6, 2d
 
-    section "Artifact Generation & AI-Enhanced CEGAR (9 weeks)"
+    section "Artifact & AI-CEGAR (9w)"
     SeniorCoder vPlan…                      :after P2T7, 7d
     Covergroups                              :after P3T1, 7d
     CEX Annotation                           :after P2T7, 6d
@@ -89,7 +89,7 @@ gantt
     DO-254 Hooks                            :after P3T5, 3d
     Phase 3 Verification & Demo              :after P3T6, 2d
 
-    section "End-to-End Testing & Documentation (5 weeks)"
+    section "Testing & Docs (5w)"
     E2E Tests                                :after P3T7, 5d
     Tests & Tuning                          :after P4T1, 7d
     Refine Retrieval                         :after P4T2, 5d
