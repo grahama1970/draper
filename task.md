@@ -101,7 +101,7 @@ gantt
 
 ## Phase 5: Iterative Refinement
 
-- [ ] **Task 5.1: Librarian Review of Tech/Security Updates**
+- [X] **Task 5.1: Librarian Review of Tech/Security Updates**
   - Action: Librarian checks Coder and Hacker updates for clarity and correctness.
   - Deliverable: Further refined documentation.
 

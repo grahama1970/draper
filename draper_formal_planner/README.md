@@ -1,207 +1,116 @@
-# 🧠 AI-Driven Formal Verification Planner for DO-254 (v2.1 - Final)
+# 🧠 AI-Driven Formal Verification Planner for DO-254
 
-## 📑 Table of Contents
-- [Abstract](#abstract)
-- [Key Features](#key-features)
-- [Workflow & Architecture](#workflow--architecture)
-- [Implementation Strategy](#implementation-strategy)
-- [Feasibility Report](#feasibility-report)
-- [Deployment Strategy](#deployment-strategy)
-- [Key Assumptions & Questions](#key-assumptions--questions)
-- [Success Metrics](#success-metrics)
+> **Note:** On-premises deployment significantly aids ITAR compliance by keeping data internal. Full compliance requires additional organizational controls (access restrictions, audits, training, documentation).
 
 ---
 
 ## 📜 Abstract
-An MCP-integrated, on-premises agentic R&D system designed to accelerate and improve the rigor of DO-254 formal verification for Draper's radiation-hardened hardware.
 
-> **Note:** On-premises deployment significantly aids ITAR compliance by keeping data internal, but full compliance requires additional organizational controls (access restrictions, audits, training, documentation).
-
-**🔑 Core Value Proposition:**
-
-- 🤖 Automates labor-intensive verification tasks with human oversight
-- 🗃️ Leverages Draper's historical verification data via `MCPDocumentRetriever`
-- ☢️ Integrates SEU radiation fault models through an EDA abstraction layer
-- 🧠 Implements AI-assisted Counterexample-Guided Abstraction Refinement (CEGAR)
-- 📄 Generates certification-ready artifacts supporting DO-254 compliance
+Develop an MCP-compatible, on-premises agentic R&D system (**draper-mcp-formal-planner**) to accelerate and enhance DO-254 formal verification of Draper's radiation-hardened hardware. The system leverages curated historical data, integrates SEU models, automates artifact generation, assists in AI-driven CEGAR loops, and incorporates human oversight for critical decisions.
 
 ---
 
-## ✨ Key Features
+## 🔑 Core Components
 
-### 🔍 Curated Cross-Project Assertion Reuse
-- `DraperRetriever` agent queries a curated vector database of historical properties
-- 👥 Human validation integrated into the workflow
+- **🤖 Agentic Workflow (MCP):**  
+  Orchestrated by `Boomerang`, coordinating:  
+  `Planner`, `DraperRetriever`, `SeniorCoder-Formal`, `FormalVerifier`, `RadHardSpecialist`.  
+  Includes mandatory human-in-the-loop steps for property validation and complex counterexample analysis.
 
-### ⚙️ Abstracted & Radiation-Aware Formal Verification
-- 🛠️ EDA abstraction layer (initially Synopsys VC Formal)
-- ☢️ Incorporates SEU models into SystemVerilog Assertion (SVA) generation and analysis
+- **🔍 Curated Data Retriever:**  
+  `DraperRetriever` agent queries a vector database of curated historical verification assets. Requires initial data curation.
 
-### 📄 Intelligent Artifact Generation
-- 🤖 Automated generation of verification plans (vPlans), SVAs, and covergroups
-- 📜 Aligns with DO-254 certification objectives
+- **🛠️ EDA Tool Abstraction Layer:**  
+  Python library wrapping formal tool interactions (initially VC Formal) and license management.
 
-### 🔄 AI-Enhanced CEGAR with Human Oversight
-- 🧠 AI assists in abstraction, counterexample analysis, and refinement
-- 👥 Human review for complex or ambiguous counterexamples ensures certification rigor
+- **📄 Artifact Generation:**  
+  `SeniorCoder-Formal` generates vPlans, SEU-aware SVAs, and covergroups aligned with DO-254 objectives.
 
-### ⚡ Integrated Resource Management
-- 🔑 EDA license management integration
-- ⏱️ Efficient job queuing and scheduling
+- **🔄 AI-Assisted CEGAR:**  
+  `FormalVerifier` runs proofs and annotates counterexamples.  
+  `SeniorCoder-Formal` analyzes annotated CEX, suggests refinements, escalates complex cases for human review.
 
-### 👥 Human-in-the-Loop by Design
-- ✅ Critical steps require human approval
-- ✍️ Final sign-off by verification engineers
+- **☢️ Radiation Awareness:**  
+  `RadHardSpecialist` integrates Draper SEU models into property generation and analysis.
 
----
+- **⚡ Resource Management:**  
+  `Boomerang` manages license checks and job queuing.
 
-## 🔄 Workflow & Architecture
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f0f0f0'}}}%%
-sequenceDiagram
-    participant Planner as 📝 Planner
-    participant Boomerang as 🪃 Boomerang
-    participant Retriever as 🔍 DraperRetriever
-    participant Coder as 👩‍💻 SeniorCoder
-    participant Verifier as ⚙️ FormalVerifier
-    participant Human as 🧑‍🔬 Human
-    participant RadSpec as ☢️ RadSpec
-    participant EDALayer as 🛠️ EDALayer
-
-    Planner->>Boomerang: Assign DO-254 Task
-    Boomerang->>RadSpec: Request SEU Guidance
-    RadSpec-->>Boomerang: SEU Models/Constraints
-    Boomerang->>Retriever: Query Historical Properties
-    Retriever->>Boomerang: Candidate Properties
-    Boomerang->>Coder: Validate Properties
-    Coder->>Human: Request Review (if ambiguous)
-    Human-->>Coder: Validation Feedback
-    Coder->>Boomerang: Approved Properties
-    
-    Boomerang->>Coder: Generate vPlan/SVA/Covergroups
-    Coder->>EDALayer: Verify Tool Availability
-    EDALayer-->>Coder: License Status
-    Coder->>Boomerang: Verification Artifacts
-    
-    loop AI-Assisted CEGAR Loop
-        Boomerang->>Verifier: Run Formal Verification
-        Verifier->>EDALayer: Execute Proof
-        EDALayer-->>Verifier: Results
-        alt Counterexample Found
-            Verifier->>Boomerang: Annotated CEX
-            Boomerang->>Coder: Analyze CEX
-            Coder->>Human: Request Review (complex cases)
-            Human-->>Coder: Analysis Feedback
-            Coder->>Boomerang: Suggested Refinements
-            Boomerang->>Coder: Update SVA
-            Coder->>Boomerang: Updated Artifacts
-        else Verification Pass
-            Boomerang->>Planner: Final Report
-        end
-    end
-```
-
-### 🔄 Workflow Summary
-
-1. **📌 Tasking & Retrieval**  
-   - Planner assigns task  
-   - System retrieves and validates historical properties
-
-2. **📄 Artifact Generation**  
-   - Automated vPlan, SVA, and covergroup generation  
-   - Incorporates SEU-aware constraints
-
-3. **🔄 Verification Loop**  
-   - License-aware job scheduling  
-   - AI-assisted CEGAR with human review of complex cases
-
-4. **✅ Completion**  
-   - Coverage goal verification  
-   - Final report generation
+- **📦 Packaging & Deployment:**  
+  Secure on-premises deployment via Docker and `uv`, requiring GPU resources (H100 recommended).
 
 ---
 
-## 🗓️ Implementation Strategy
+## 🔄 Recovery Plan (If Session Crashes)
+
+1. 🔍 Review `taskplan.md` for last completed task `[X]`.
+2. ▶️ Resume at the first incomplete task `[ ]`.
+3. 🚀 Relaunch environment and dependencies (`docker compose up -d`), restart MCP agents.
+4. 📝 Instruct `Planner` to continue.
+
+---
+
+## 📅 Task Plan Visualization
 
 *(See `taskplan.md` for detailed Gantt chart)*
 
-### 🏗️ Phases:
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f0f0f0'}}}%%
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Formal Planner Task Plan (v2.1 - Final)
+    excludes    weekends
 
-1. **Core Architecture** (Weeks 1–4)  
-   - MCP agent framework  
-   - EDA abstraction layer
+    section "Setup, Curation & Retrieval (8 weeks)"
+    Initialize Project & Dependencies          :2025-04-22, 5d
+    Historical Data Curation                   :after P1T1, 10d
+    Vectorize & Index Data                     :after P1T2, 7d
+    Implement DraperRetriever Agent            :after P1T3, 7d
+    Implement Validation & HITL Hook           :after P1T4, 5d
+    Phase 1 Verification & Demo                :after P1T5, 2d
 
-2. **📊 Data Integration** (Weeks 5–8)  
-   - Historical data curation  
-   - SEU model integration
+    section "Formal Tool Abstraction & SEU Integration (8 weeks)"
+    Develop EDA Abstraction Layer              :after P1T6, 10d
+    Integrate License Management               :after P2T1, 5d
+    Implement FormalVerifier Agent             :after P2T1, 7d
+    Define SEU Model Strategy & Scope          :after P1T6, 5d
+    Implement RadHardSpecialist                :after P2T4, 5d
+    SEU Injection in SVA Generation            :after P2T5, 5d
+    Phase 2 Verification & Demo                :after P2T6, 2d
 
-3. **🤖 Verification Automation** (Weeks 9–12)  
-   - Automated artifact generation  
-   - AI-assisted CEGAR implementation
+    section "Artifact Generation & AI-Enhanced CEGAR (9 weeks)"
+    SeniorCoder vPlan/SVA Generation           :after P2T7, 7d
+    Covergroup Generation                      :after P3T1, 7d
+    CEX Annotation in FormalVerifier           :after P2T7, 6d
+    CEX Analysis & Suggestion                  :after P3T3, 7d
+    Implement CEGAR Loop & HITL                :after P3T4, 7d
+    Integrate DO-254 Reporting Hooks           :after P3T5, 3d
+    Phase 3 Verification & Demo                :after P3T6, 2d
 
-4. **🧪 Validation & Refinement** (Weeks 13–16)  
-   - Pilot testing  
-   - Performance optimization
-
----
-
-## 📊 Feasibility Report
-
-| Aspect                   | Rating                 | Notes                                         |
-|--------------------------|------------------------|-----------------------------------------------|
-| **Technical Viability**  | ⭐⭐⭐⭐⭐⭐⭐⭐ (8/10)       | Requires robust engineering                   |
-| **ITAR Compliance**      | ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ (10/10)    | Fully on-premises (additional controls still required) |
-| **Performance**          | ⭐⭐⭐⭐⭐ (Moderate)      | Focused on improving engineer efficiency      |
-| **Certification Impact** | ⭐⭐⭐⭐⭐⭐⭐ (50–70%)      | Potential reduction in verification effort    |
-| **R&D Focus**            | ⭐⭐⭐⭐⭐⭐⭐⭐ (High)       | Explores AI-assisted formal verification      |
-| **Data Dependency**      | ⭐⭐⭐⭐⭐⭐⭐⭐⭐ (Very High) | Relies on curated historical data             |
-| **Integration Complexity**| ⭐⭐⭐⭐⭐⭐⭐⭐ (High)      | Multiple tool and data integrations           |
-
----
-
-## 🚀 Deployment Strategy
-
-### 🏢 Primary: On-Premises
-- 🔒 Maximum security for ITAR and sensitive IP
-- 📜 Simplifies compliance
-- 🛠️ Direct EDA tool integration
-
-### ☁️ Alternative: Google Cloud ITAR
-- ☁️ GCP Assured Workloads
-- 💰 Increased complexity and cost
-
-### 💻 Hardware Requirements
-- 🖥️ Initial: 2× NVIDIA H100 GPUs
-- 📈 Scalable: Add 2–4 GPUs as needed
+    section "End-to-End Testing & Documentation (5 weeks)"
+    Develop E2E Test Cases                     :after P3T7, 5d
+    Execute Tests & Performance Tuning         :after P4T1, 7d
+    Refine Retrieval & CEX Analysis            :after P4T2, 5d
+    Finalize Documentation & User Guides       :after P4T3, 3d
+    Final Demo & Handover                     :after P4T4, 2d
+```
 
 ---
 
-## ❓ Key Assumptions & Questions
+## 🗺️ Phase Legend
 
-### 🔗 Critical Dependencies
-1. 📂 Availability of historical verification data
-2. ☢️ Access to Draper SEU models
-3. 🛠️ EDA tool scripting capabilities
-
-### ❓ Open Questions
-- 📊 Data format and curation effort?  
-- ⚛️ SEU model integration method?  
-- 🛠️ Primary formal verification tools?  
-- 🔑 License management API availability?  
-- ⚠️ Key DO-254 pain points to prioritize?
+| Short Title                   | Full Description                                         |
+|-------------------------------|----------------------------------------------------------|
+| **Setup & Retrieval**         | Setup, Curation & Retrieval (8 Weeks)                   |
+| **Tool & SEU Integration**    | Formal Tool Abstraction & SEU Integration (8 Weeks)     |
+| **Artifact & AI-CEGAR**       | Artifact Generation & AI-Enhanced CEGAR (9 Weeks)       |
+| **Testing & Docs**            | End-to-End Testing & Documentation (5 Weeks)            |
 
 ---
 
-## 🎯 Success Metrics (R&D)
+## 📝 Final Notes
 
-### 📏 Evaluation Criteria
-- ⏱️ Reduction in verification task time
-- 📝 Quality of generated properties
-- 🔄 Effectiveness of AI-assisted CEGAR loop
-- 📄 Completeness of certification artifacts
-
-### 📊 Measurement Approach
-- ⏳ Comparative time studies
-- 📋 Engineer feedback surveys
-- 🔍 Artifact quality reviews
+- ☢️ Integrates **SEU models** into property generation and verification.
+- 🔄 Uses **AI-assisted CEGAR** with human-in-the-loop review for certification rigor.
+- 📄 Automates artifact generation aligned with DO-254.
+- 🏢 Designed for **secure, on-premises deployment** with scalable GPU acceleration.

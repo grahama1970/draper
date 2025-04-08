@@ -1,8 +1,10 @@
 # 🎯 Objective: AI-Driven Formal Verification Planner for DO-254
 
-Develop an MCP-compatible, on-premises agentic R&D system (**draper-mcp-formal-planner**) to accelerate and enhance DO-254 formal verification of Draper's radiation-hardened hardware. The system leverages curated historical data, integrates SEU models, automates artifact generation, assists in AI-driven CEGAR loops, and incorporates human oversight for critical decisions.
+> **Note:** On-premises deployment significantly aids ITAR compliance by keeping data internal. Full compliance requires additional organizational controls (access restrictions, audits, training, documentation).
 
-> **Note:** On-premises deployment significantly aids ITAR compliance by keeping data internal, but full compliance requires additional organizational controls (access restrictions, audits, training, documentation).
+---
+
+Develop an MCP-compatible, on-premises agentic R&D system (**draper-mcp-formal-planner**) to accelerate and enhance DO-254 formal verification of Draper's radiation-hardened hardware. The system leverages curated historical data, integrates SEU models, automates artifact generation, assists in AI-driven CEGAR loops, and incorporates human oversight for critical decisions.
 
 ---
 
@@ -57,7 +59,7 @@ gantt
     title       Formal Planner Task Plan (v2.1 - Final)
     excludes    weekends
 
-    section "Phase 1: Setup, Curation & Retrieval (8 Weeks)"
+    section "Setup, Curation & Retrieval (8 weeks)"
     Initialize Project & Dependencies          :done, P1T1, 2025-04-22, 5d
     Historical Data Curation                   :active, P1T2, after P1T1, 10d
     Vectorize & Index Data                     :P1T3, after P1T2, 7d
@@ -65,7 +67,7 @@ gantt
     Implement Validation & HITL Hook           :P1T5, after P1T4, 5d
     Phase 1 Verification & Demo                :P1T6, after P1T5, 2d
 
-    section "Phase 2: Formal Tool Abstraction & SEU Integration (8 Weeks)"
+    section "Formal Tool Abstraction & SEU Integration (8 weeks)"
     Develop EDA Abstraction Layer              :P2T1, after P1T6, 10d
     Integrate License Management               :P2T2, after P2T1, 5d
     Implement FormalVerifier Agent             :P2T3, after P2T1, 7d
@@ -74,7 +76,7 @@ gantt
     SEU Injection in SVA Generation            :P2T6, after P2T5, 5d
     Phase 2 Verification & Demo                :P2T7, after P2T6, 2d
 
-    section "Phase 3: Artifact Generation & AI-Enhanced CEGAR (9 Weeks)"
+    section "Artifact Generation & AI-Enhanced CEGAR (9 weeks)"
     SeniorCoder vPlan/SVA Generation           :P3T1, after P2T7, 7d
     Covergroup Generation                      :P3T2, after P3T1, 7d
     CEX Annotation in FormalVerifier           :P3T3, after P2T7, 6d
@@ -83,7 +85,7 @@ gantt
     Integrate DO-254 Reporting Hooks           :P3T6, after P3T5, 3d
     Phase 3 Verification & Demo                :P3T7, after P3T6, 2d
 
-    section "Phase 4: End-to-End Testing & Documentation (5 Weeks)"
+    section "End-to-End Testing & Documentation (5 weeks)"
     Develop E2E Test Cases                     :P4T1, after P3T7, 5d
     Execute Tests & Performance Tuning         :P4T2, after P4T1, 7d
     Refine Retrieval & CEX Analysis            :P4T3, after P4T2, 5d
@@ -97,5 +99,5 @@ gantt
 
 - ☢️ Integrates **SEU models** into property generation and verification.
 - 🔄 Uses **AI-assisted CEGAR** with human-in-the-loop review for certification rigor.
-- 🤖 Automates artifact generation aligned with DO-254.
+- 📄 Automates artifact generation aligned with DO-254.
 - 🏢 Designed for **secure, on-premises deployment** with scalable GPU acceleration.
