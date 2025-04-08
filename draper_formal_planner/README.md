@@ -15,6 +15,8 @@
 ## 📜 Abstract
 An MCP-integrated, on-premises agentic R&D system designed to accelerate and improve the rigor of DO-254 formal verification for Draper's radiation-hardened hardware.
 
+> **Note:** On-premises deployment significantly aids ITAR compliance by keeping data internal, but full compliance requires additional organizational controls (access restrictions, audits, training, documentation).
+
 **🔑 Core Value Proposition:**
 
 - 🤖 Automates labor-intensive verification tasks with human oversight
@@ -146,15 +148,15 @@ sequenceDiagram
 
 ## 📊 Feasibility Report
 
-| Aspect                 | Rating     | Notes                                         |
-|------------------------|------------|-----------------------------------------------|
-| **Technical Viability**    | ⭐⭐⭐⭐⭐⭐⭐⭐ (8/10) | Requires robust engineering                   |
-| **ITAR Compliance**        | ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ (10/10) | Fully on-premises                            |
-| **Performance**            | ⭐⭐⭐⭐⭐ (Moderate) | Focused on improving engineer efficiency      |
-| **Certification Impact**   | ⭐⭐⭐⭐⭐⭐⭐ (50–70%) | Potential reduction in verification effort    |
-| **R&D Focus**              | ⭐⭐⭐⭐⭐⭐⭐⭐ (High) | Explores AI-assisted formal verification      |
-| **Data Dependency**        | ⭐⭐⭐⭐⭐⭐⭐⭐⭐ (Very High) | Relies on curated historical data             |
-| **Integration Complexity** | ⭐⭐⭐⭐⭐⭐⭐⭐ (High) | Multiple tool and data integrations           |
+| Aspect                   | Rating                 | Notes                                         |
+|--------------------------|------------------------|-----------------------------------------------|
+| **Technical Viability**  | ⭐⭐⭐⭐⭐⭐⭐⭐ (8/10)       | Requires robust engineering                   |
+| **ITAR Compliance**      | ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ (10/10)    | Fully on-premises (additional controls still required) |
+| **Performance**          | ⭐⭐⭐⭐⭐ (Moderate)      | Focused on improving engineer efficiency      |
+| **Certification Impact** | ⭐⭐⭐⭐⭐⭐⭐ (50–70%)      | Potential reduction in verification effort    |
+| **R&D Focus**            | ⭐⭐⭐⭐⭐⭐⭐⭐ (High)       | Explores AI-assisted formal verification      |
+| **Data Dependency**      | ⭐⭐⭐⭐⭐⭐⭐⭐⭐ (Very High) | Relies on curated historical data             |
+| **Integration Complexity**| ⭐⭐⭐⭐⭐⭐⭐⭐ (High)      | Multiple tool and data integrations           |
 
 ---
 
