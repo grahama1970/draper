@@ -13,43 +13,48 @@
 ---
 
 ## Abstract
-An MCP-integrated, on-premises agentic system **proposed as a Research & Development (R&D) initiative** designed to significantly accelerate and improve the rigor of the DO-254 formal verification process for Draper's radiation-hardened systems.
+An MCP-integrated, on-premises agentic R&D system designed to accelerate and improve the rigor of DO-254 formal verification for Draper's radiation-hardened hardware.
 
-🔹 **Core Value Proposition**:
-- Automates laborious verification tasks while ensuring human oversight
+**Core Value Proposition:**
+
+- Automates labor-intensive verification tasks with human oversight
 - Leverages Draper's historical verification data via `MCPDocumentRetriever`
-- Integrates radiation fault models through **EDA Tool Abstraction Layer**
-- Implements **AI-assisted Counterexample-Guided Refinement (CEGAR)**
+- Integrates SEU radiation fault models through an EDA abstraction layer
+- Implements AI-assisted Counterexample-Guided Abstraction Refinement (CEGAR)
 - Generates certification-ready artifacts supporting DO-254 compliance
 
+---
+
 ## Key Features
-✅ **Curated Cross-Project Assertion Reuse**  
-   - Specialized `DraperRetriever` queries curated vector database  
-   - Human validation integrated into workflow  
 
-✅ **Abstracted & Rad-Aware Formal Verification**  
-   - EDA Tool Abstraction Layer (initially Synopsys VC Formal)  
-   - Incorporates SEU models into SVA generation  
+### ✅ Curated Cross-Project Assertion Reuse
+- `DraperRetriever` agent queries a curated vector database of historical properties
+- Human validation integrated into the workflow
 
-✅ **Intelligent Artifact Generation**  
-   - Automated vPlans, SVA, and covergroups generation  
-   - Aligned with DO-254 objectives  
+### ✅ Abstracted & Radiation-Aware Formal Verification
+- EDA abstraction layer (initially Synopsys VC Formal)
+- Incorporates SEU models into SystemVerilog Assertion (SVA) generation and analysis
 
-✅ **AI-Enhanced CEGAR with Annotated CEX**  
-   - Robust counterexample analysis loop  
-   - Human review for complex cases  
+### ✅ Intelligent Artifact Generation
+- Automated generation of verification plans (vPlans), SVAs, and covergroups
+- Aligns with DO-254 certification objectives
 
-✅ **Integrated Resource Management**  
-   - EDA license management integration  
-   - Efficient job queuing  
+### ✅ AI-Enhanced CEGAR with Human Oversight
+- AI assists in abstraction, counterexample analysis, and refinement
+- Human review for complex or ambiguous counterexamples ensures certification rigor
 
-✅ **Human-in-the-Loop by Design**  
-   - Critical steps require human approval  
-   - Final sign-off by verification engineers  
+### ✅ Integrated Resource Management
+- EDA license management integration
+- Efficient job queuing and scheduling
+
+### ✅ Human-in-the-Loop by Design
+- Critical steps require human approval
+- Final sign-off by verification engineers
 
 ---
 
 ## Workflow & Architecture
+
 ```mermaid
 sequenceDiagram
     participant Planner as 📝 Planner
@@ -76,119 +81,124 @@ sequenceDiagram
     EDALayer-->>Coder: License Status
     Coder->>Boomerang: Verification Artifacts
     
-    loop CEGAR Verification Cycle
+    loop AI-Assisted CEGAR Loop
         Boomerang->>Verifier: Run Formal Verification
         Verifier->>EDALayer: Execute Proof
         EDALayer-->>Verifier: Results
-        alt CEX Found
+        alt Counterexample Found
             Verifier->>Boomerang: Annotated CEX
             Boomerang->>Coder: Analyze CEX
             Coder->>Human: Request Review (complex cases)
             Human-->>Coder: Analysis Feedback
             Coder->>Boomerang: Suggested Refinements
             Boomerang->>Coder: Update SVA
-            Coder->>Boomerang: Updated Verification Artifacts
+            Coder->>Boomerang: Updated Artifacts
         else Verification Pass
             Boomerang->>Planner: Final Report
         end
     end
 ```
 
-### Workflow Explanation
+### Workflow Summary
+
 1. **Tasking & Retrieval**  
-   - Planner assigns verification task  
-   - System retrieves relevant historical properties  
-   - Human validation for ambiguous cases  
+   - Planner assigns task  
+   - System retrieves and validates historical properties
 
 2. **Artifact Generation**  
-   - Automated vPlan and SVA generation  
-   - Radiation-aware verification setup  
+   - Automated vPlan, SVA, and covergroup generation  
+   - Incorporates SEU-aware constraints
 
 3. **Verification Loop**  
-   - License-aware job queuing  
-   - Formal proof execution  
-   - Annotated counterexample analysis  
+   - License-aware job scheduling  
+   - AI-assisted CEGAR with human review of complex cases
 
 4. **Completion**  
    - Coverage goal verification  
-   - Final report generation  
+   - Final report generation
 
 ---
 
 ## Implementation Strategy
-📅 (See taskplan.md for detailed Gantt chart)
 
-### Phased Approach:
-1. **Core Architecture** (Weeks 1-4)  
+*(See `taskplan.md` for detailed Gantt chart)*
+
+### Phases:
+
+1. **Core Architecture** (Weeks 1–4)  
    - MCP agent framework  
-   - EDA abstraction layer  
+   - EDA abstraction layer
 
-2. **Data Integration** (Weeks 5-8)  
+2. **Data Integration** (Weeks 5–8)  
    - Historical data curation  
-   - SEU model integration  
+   - SEU model integration
 
-3. **Verification Automation** (Weeks 9-12)  
-   - SVA generation  
-   - CEGAR implementation  
+3. **Verification Automation** (Weeks 9–12)  
+   - Automated artifact generation  
+   - AI-assisted CEGAR implementation
 
-4. **Validation & Refinement** (Weeks 13-16)  
+4. **Validation & Refinement** (Weeks 13–16)  
    - Pilot testing  
-   - Performance optimization  
+   - Performance optimization
 
 ---
 
 ## Feasibility Report
-| Aspect                | Rating  | Notes |
-|-----------------------|---------|-------|
-| Technical Viability   | 8/10    | Requires robust engineering |
-| ITAR Compliance       | 10/10   | On-prem deployment |
-| Performance           | Moderate| Focus on engineer efficiency |
-| Certification Impact  | 50-70%  | Potential effort reduction |
-| R&D Focus            | High    | Exploration of AI assistance |
-| Data Dependency       | Very High| Requires curated historical data |
-| Integration Complexity| High    | Multiple system integrations |
+
+| Aspect                 | Rating     | Notes                                         |
+|------------------------|------------|-----------------------------------------------|
+| Technical Viability    | 8/10       | Requires robust engineering                   |
+| ITAR Compliance        | 10/10      | Fully on-premises                            |
+| Performance            | Moderate   | Focused on improving engineer efficiency      |
+| Certification Impact   | 50–70%     | Potential reduction in verification effort    |
+| R&D Focus              | High       | Explores AI-assisted formal verification      |
+| Data Dependency        | Very High  | Relies on curated historical data             |
+| Integration Complexity | High       | Multiple tool and data integrations           |
 
 ---
 
 ## Deployment Strategy
-### Primary Recommendation: On-Premises
-- Maximum security for ITAR/sensitive IP  
-- Simplified compliance  
-- Direct EDA tool integration  
 
-### Secondary Option: Google Cloud ITAR
-- GCP Assured Workloads  
-- Increased complexity and cost  
+### Primary: On-Premises
+- Maximum security for ITAR and sensitive IP
+- Simplifies compliance
+- Direct EDA tool integration
+
+### Alternative: Google Cloud ITAR
+- GCP Assured Workloads
+- Increased complexity and cost
 
 ### Hardware Requirements
-- **Initial**: 2x NVIDIA H100 GPUs  
-- **Scalable**: Add 2-4 GPUs as needed  
+- Initial: 2× NVIDIA H100 GPUs
+- Scalable: Add 2–4 GPUs as needed
 
 ---
 
 ## Key Assumptions & Questions
-❗ **Critical Dependencies**:
-1. Historical verification data availability  
-2. SEU model accessibility  
-3. EDA tool scripting capabilities  
 
-❓ **Open Questions for Draper**:
+### Critical Dependencies
+1. Availability of historical verification data
+2. Access to Draper SEU models
+3. EDA tool scripting capabilities
+
+### Open Questions
 - Data format and curation effort?  
 - SEU model integration method?  
 - Primary formal verification tools?  
 - License management API availability?  
-- Key DO-254 pain points to address?  
+- Key DO-254 pain points to prioritize?
 
 ---
 
 ## Success Metrics (R&D)
-🎯 **Evaluation Criteria**:
-- % reduction in verification task time  
-- Quality of generated properties  
-- Effectiveness of CEGAR loop  
-- Certification artifact completeness  
 
-📊 **Measurement Approach**:
-- Comparative time studies  
-- Engineer feedback surveys  
+### Evaluation Criteria
+- Reduction in verification task time
+- Quality of generated properties
+- Effectiveness of AI-assisted CEGAR loop
+- Completeness of certification artifacts
+
+### Measurement Approach
+- Comparative time studies
+- Engineer feedback surveys
 - Artifact quality reviews
